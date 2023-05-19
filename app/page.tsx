@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect } from "react";
 
 export default function Home() {
-  const liffId = process.env.NEXT_PUBLIC_LIFF_ID as string
+  const liffId = "1661146958-M2X7n4Bx"
 
   const liffInitial = async () => {
     const liff = (await import('@line/liff')).default
