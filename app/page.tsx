@@ -2,16 +2,14 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import liff from '@line/liff';
 
-type UnPromise<T> = T extends Promise<infer X>? X : T;
 
 export default function Home() {
   const liffId = "1661146958-M2X7n4Bx"
-  const [profile, setprofile] = useState< UnPromise<ReturnType<typeof liff.getProfile>>>();
+  const [profile, setprofile] = useState<any>();
 
   const liffInitial = async () => {
-   // const liff = (await import('@line/liff')).default
+   const liff = (await import('@line/liff')).default
     try {
       await liff.init({ liffId });
       console.log('initially loaded liff');
