@@ -24,7 +24,7 @@ export default function Home() {
       console.log('already logged in')
     }
   }
-  useEffect(() => { liffInitial() })
+  useEffect(() => { liffInitial() }, [])
   return (
     <main>
       <h1>Home Page</h1>
