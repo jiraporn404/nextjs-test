@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Registration from "./registration/page";
 
 
 export default function Home() {
@@ -35,15 +36,18 @@ export default function Home() {
   useEffect(() => { liffInitial() }, [])
   return (
     <main>
-      <h1>Home Page</h1>
-      <h1>{profile?.displayName}</h1>
-      <p>
-        <Link href="/users">
-          Users
-        </Link>
-      </p>
-      {runningInLine ? <p>Running in Line</p>
-        : <p>Not running in Line</p>}
+      {runningInLine ?
+        <div>
+          <h1>Home Page</h1>
+          <h1>{profile?.displayName}</h1>
+          <p>
+            <Link href="/users">
+              Users
+            </Link>
+          </p>
+        </div>
+
+        : <Registration />}
     </main>
   )
 }
