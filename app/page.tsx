@@ -3,13 +3,13 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Registration from "./registration/page";
+import Homepage from "./homepage/page";
 
 
 export default function Home() {
   const liffId = "1661146958-M2X7n4Bx"
   const [profile, setprofile] = useState<any>();
   const [runningInLine, setrunningInLine] = useState<boolean>();
-
 
   const liffInitial = async () => {
     const liff = (await import('@line/liff')).default
@@ -19,7 +19,7 @@ export default function Home() {
     } catch (error: any) {
       console.error('liff init error', error.message)
     }
-    if (/*liff.isInClient()*/liff.getOS() === "ios" || liff.getOS() === "android") {
+    if (liff.isInClient()) {
       setrunningInLine(true);
       if (!liff.isLoggedIn()) {
         liff.login();
@@ -30,24 +30,28 @@ export default function Home() {
       }
     } else {
       setrunningInLine(false);
+      <Registration />
     }
 
+  }
+  const loginLine = async () => {
+    const liff = (await import('@line/liff')).default
+    liff.login();
+    const profile = await liff.getProfile();
+    return <Homepage profile={profile} />
   }
   useEffect(() => { liffInitial() }, [])
   return (
     <main>
+      <p className="text-center text-2xl">Welcome U-Work</p>
       {runningInLine ?
-        <div>
-          <h1>Home Page</h1>
-          <h1>{profile?.displayName}</h1>
-          <p>
-            <Link href="/users">
-              Users
-            </Link>
-          </p>
-        </div>
+        <Homepage profile={profile} />
+        :
+        <>
+          <button className="btn btn-block my-4" onClick={loginLine}>ลงทะเบียนผ่าน Line</button>
+          <Link href="/registration" className="btn btn-block my-4">ลงทะเบียน</Link>
 
-        : <Registration />}
+        </>}
     </main>
   )
 }
