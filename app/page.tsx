@@ -45,11 +45,11 @@ export default function Home() {
   useEffect(() => { liffInitial() }, [])
   return (
     <main>
-      <p className="text-center text-2xl">Welcome U-Work</p>
       {runningInLine ?
-        ""
+        <Homepage />
         :
         <>
+          <p className="text-center text-2xl">Welcome U-Work</p>
           <button className="btn btn-block my-4" onClick={loginLine}>ลงทะเบียนผ่าน Line</button>
           <Link href="/registration" className="btn btn-block my-4">ลงทะเบียน</Link>
         </>
