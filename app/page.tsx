@@ -37,18 +37,18 @@ export default function Home() {
   const loginLine = async () => {
     const liff = (await import('@line/liff')).default
     await liff.init({ liffId });
-    liff.login();
+    liff.login({ redirectUri: "https://nextjs-test-git-dev-jiraporn404.vercel.app/about" });
     const profile = await liff.getProfile();
     setdisplayName(profile.displayName);
     console.log('login')
-    return <Homepage displayName={displayName} />
+    return <Homepage />
   }
   useEffect(() => { liffInitial() }, [])
   return (
     <main>
       <p className="text-center text-2xl">Welcome U-Work</p>
       {runningInLine ?
-        <Homepage displayName={displayName} />
+        <Homepage />
         :
         <>
           <button className="btn btn-block my-4" onClick={loginLine}>ลงทะเบียนผ่าน Line</button>
