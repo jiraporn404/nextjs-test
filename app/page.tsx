@@ -11,6 +11,7 @@ export default function Home() {
   const [profile, setprofile] = useState<any>();
   const [runningInLine, setrunningInLine] = useState<boolean>();
   const [displayName, setdisplayName] = useState<string>('');
+  const [isLoggedIn, setisLoggedIn] = useState<boolean>(false);
   const liffInitial = async () => {
     const liff = (await import('@line/liff')).default
     try {
@@ -37,11 +38,9 @@ export default function Home() {
   const loginLine = async () => {
     const liff = (await import('@line/liff')).default
     await liff.init({ liffId });
-    liff.login({ redirectUri: "https://nextjs-test-git-dev-jiraporn404.vercel.app/about" });
-    const profile = await liff.getProfile();
-    setdisplayName(profile.displayName);
-    console.log('login')
-    return <Homepage />
+    liff.login({ redirectUri: "https://nextjs-test-git-dev-jiraporn404.vercel.app/homepage" });
+    setisLoggedIn(true);
+
   }
   useEffect(() => { liffInitial() }, [])
   return (
@@ -50,11 +49,14 @@ export default function Home() {
       {runningInLine ?
         <Homepage />
         :
-        <>
-          <button className="btn btn-block my-4" onClick={loginLine}>ลงทะเบียนผ่าน Line</button>
-          <Link href="/registration" className="btn btn-block my-4">ลงทะเบียน</Link>
+        isLoggedIn ?
+          <Homepage /> :
+          <>
+            <button className="btn btn-block my-4" onClick={loginLine}>ลงทะเบียนผ่าน Line</button>
+            <Link href="/registration" className="btn btn-block my-4">ลงทะเบียน</Link>
+          </>
 
-        </>}
+      }
     </main>
   )
 }
