@@ -19,7 +19,7 @@ export default function Home() {
     } catch (error: any) {
       console.error('liff init error', error.message)
     }
-    if (liff.isInClient()) {
+    if (/*liff.isInClient()*/liff.getOS() === "ios" || liff.getOS() === "android") {
       setrunningInLine(true);
       if (!liff.isLoggedIn()) {
         liff.login();
