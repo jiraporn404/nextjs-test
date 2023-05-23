@@ -1,14 +1,14 @@
 import Link from "next/link"
 
 type Props = {
-    profile: any
+    displayName: string
 }
 
-export default function Homepage({ profile }: Props) {
+export default function Homepage({ displayName }: Props) {
     return (
         <>
             <p className="text-center text-2xl">Hello!!!</p>
-            <p>{profile.displayName}</p>
+            <p>{displayName}</p>
             <Link href="/users">
                 Users
             </Link>

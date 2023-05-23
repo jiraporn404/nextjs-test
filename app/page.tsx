@@ -10,7 +10,7 @@ export default function Home() {
   const liffId = "1661146958-M2X7n4Bx"
   const [profile, setprofile] = useState<any>();
   const [runningInLine, setrunningInLine] = useState<boolean>();
-
+  const [displayName, setdisplayName] = useState<string>('');
   const liffInitial = async () => {
     const liff = (await import('@line/liff')).default
     try {
@@ -38,15 +38,17 @@ export default function Home() {
     const liff = (await import('@line/liff')).default
     await liff.init({ liffId });
     liff.login();
-    const profile = await liff.getProfile() as any;
-    return <Homepage profile={profile} />
+    const profile = await liff.getProfile();
+    setdisplayName(profile.displayName);
+    console.log('login')
+    return <Homepage displayName={displayName} />
   }
   useEffect(() => { liffInitial() }, [])
   return (
     <main>
       <p className="text-center text-2xl">Welcome U-Work</p>
       {runningInLine ?
-        <Homepage profile={profile} />
+        <Homepage displayName={displayName} />
         :
         <>
           <button className="btn btn-block my-4" onClick={loginLine}>ลงทะเบียนผ่าน Line</button>
