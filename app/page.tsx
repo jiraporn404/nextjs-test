@@ -10,8 +10,7 @@ export default function Home() {
   const liffId = "1661146958-M2X7n4Bx"
   const [profile, setprofile] = useState<any>();
   const [runningInLine, setrunningInLine] = useState<boolean>();
-  const [displayName, setdisplayName] = useState<string>('');
-  const [isLoggedIn, setisLoggedIn] = useState<boolean>(false);
+
   const liffInitial = async () => {
     const liff = (await import('@line/liff')).default
     try {
@@ -23,15 +22,16 @@ export default function Home() {
     if (liff.isInClient()) {
       setrunningInLine(true);
       if (!liff.isLoggedIn()) {
-        liff.login();
+        liff.login({ redirectUri: "https://nextjs-test-git-dev-jiraporn404.vercel.app/homepage" });
       } else {
-        const profile = await liff.getProfile();
-        setprofile(profile);
-        console.log('already logged in')
+        //const profile = await liff.getProfile();
+        //setprofile(profile);
+        console.log('already logged in');
+
       }
     } else {
       setrunningInLine(false);
-      <Registration />
+
     }
 
   }
@@ -39,7 +39,7 @@ export default function Home() {
     const liff = (await import('@line/liff')).default
     await liff.init({ liffId });
     liff.login({ redirectUri: "https://nextjs-test-git-dev-jiraporn404.vercel.app/homepage" });
-    setisLoggedIn(true);
+    //setisLoggedIn(true);
 
   }
   useEffect(() => { liffInitial() }, [])
@@ -47,14 +47,12 @@ export default function Home() {
     <main>
       <p className="text-center text-2xl">Welcome U-Work</p>
       {runningInLine ?
-        <Homepage />
+        ""
         :
-        isLoggedIn ?
-          <Homepage /> :
-          <>
-            <button className="btn btn-block my-4" onClick={loginLine}>ลงทะเบียนผ่าน Line</button>
-            <Link href="/registration" className="btn btn-block my-4">ลงทะเบียน</Link>
-          </>
+        <>
+          <button className="btn btn-block my-4" onClick={loginLine}>ลงทะเบียนผ่าน Line</button>
+          <Link href="/registration" className="btn btn-block my-4">ลงทะเบียน</Link>
+        </>
 
       }
     </main>
