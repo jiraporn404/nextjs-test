@@ -36,8 +36,9 @@ export default function Home() {
   }
   const loginLine = async () => {
     const liff = (await import('@line/liff')).default
+    await liff.init({ liffId });
     liff.login();
-    const profile = await liff.getProfile();
+    const profile = await liff.getProfile() as any;
     return <Homepage profile={profile} />
   }
   useEffect(() => { liffInitial() }, [])
