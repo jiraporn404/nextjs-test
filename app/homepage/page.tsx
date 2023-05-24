@@ -7,7 +7,7 @@ type Props = {
 }
 
 export default function Homepage() {
-    const liffId = "1661146958-M2X7n4Bx"
+    const liffId = "1661222710-neKLQNNZ"
     const [profile, setprofile] = useState<any>();
 
     const liffInitial = async () => {
