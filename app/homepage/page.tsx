@@ -21,7 +21,7 @@ export default function Homepage() {
         if (liff.isLoggedIn()) {
             setprofile(await liff.getProfile());
         } else {
-            liff.login();
+            liff.login({ redirectUri: "https://nextjs-test-git-dev-jiraporn404.vercel.app/homepage" });
         }
 
     }

@@ -9,28 +9,27 @@ import Homepage from "./homepage/page";
 export default function Home() {
   const liffId = "1661146958-M2X7n4Bx"
   const [profile, setprofile] = useState<any>();
-  const [runningInLine, setrunningInLine] = useState<boolean>();
+  const [isInClient, setisInClient] = useState<boolean>();
+  const [loading, setloading] = useState(true);
 
   const liffInitial = async () => {
     const liff = (await import('@line/liff')).default
     try {
       await liff.init({ liffId });
+      setloading(false);
       console.log('initially loaded liff');
     } catch (error: any) {
       console.error('liff init error', error.message)
     }
     if (liff.isInClient()) {
-      setrunningInLine(true);
+      setisInClient(true);
       if (!liff.isLoggedIn()) {
         liff.login({ redirectUri: "https://nextjs-test-git-dev-jiraporn404.vercel.app/homepage" });
       } else {
-        //const profile = await liff.getProfile();
-        //setprofile(profile);
         console.log('already logged in');
-
       }
     } else {
-      setrunningInLine(false);
+      setisInClient(false);
 
     }
 
@@ -39,20 +38,24 @@ export default function Home() {
     const liff = (await import('@line/liff')).default
     await liff.init({ liffId });
     liff.login({ redirectUri: "https://nextjs-test-git-dev-jiraporn404.vercel.app/homepage" });
-    //setisLoggedIn(true);
-
   }
   useEffect(() => { liffInitial() }, [])
   return (
     <main>
-      {runningInLine ?
-        <Homepage />
-        :
-        <>
-          <p className="text-center text-2xl">Welcome U-Work</p>
-          <button className="btn btn-block my-4" onClick={loginLine}>ลงทะเบียนผ่าน Line</button>
-          <Link href="/registration" className="btn btn-block my-4">ลงทะเบียน</Link>
-        </>
+      {
+        loading ?
+          <div className="flex justify-center h-screen">
+            <progress className="progress w-56 m-auto"></progress>
+          </div>
+          :
+          isInClient ?
+            <Homepage />
+            :
+            <>
+              <p className="text-center text-2xl">Welcome U-Work</p>
+              <button className="btn btn-block my-4" onClick={loginLine}>ลงทะเบียนผ่าน Line</button>
+              <Link href="/registration" className="btn btn-block my-4">ลงทะเบียน</Link>
+            </>
 
       }
     </main>
