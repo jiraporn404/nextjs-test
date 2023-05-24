@@ -7,7 +7,7 @@ import Homepage from "./homepage/page";
 
 
 export default function Home() {
-  const liffId = "1661146958-M2X7n4Bx"
+  const liffId = "1661222710-neKLQNNZ"
   const [profile, setprofile] = useState<any>();
   const [isInClient, setisInClient] = useState<boolean>();
   const [loading, setloading] = useState(true);
