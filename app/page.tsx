@@ -52,7 +52,7 @@ export default function Home() {
             <Homepage />
             :
             <>
-              <p className="text-center text-2xl">Welcome U-Work</p>
+              <p className="text-center text-2xl font-thin">Welcome U-Work</p>
               <button className="btn btn-block my-4" onClick={loginLine}>ลงทะเบียนผ่าน Line</button>
               <Link href="/registration" className="btn btn-block my-4">ลงทะเบียน</Link>
             </>
