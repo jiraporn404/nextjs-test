@@ -6,23 +6,34 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate": "drizzle-kit generate:pg --schema=./app/db/schema.ts",
+    "migrate": "ts-node ./migrate.ts"
   },
   "dependencies": {
     "@line/liff": "^2.22.0",
+    "@neondatabase/serverless": "^0.4.9",
+    "@types/body-parser": "^1.19.2",
     "@types/node": "20.1.1",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
     "autoprefixer": "10.4.14",
+    "axios": "^1.4.0",
     "daisyui": "^2.51.6",
+    "drizzle-orm": "^0.26.5",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.1",
     "next": "^13.4.1",
     "postcss": "8.4.23",
+    "postgres": "^3.3.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwindcss": "3.3.2",
     "tw-elements": "^1.0.0-beta2",
     "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.18.1",
+    "ts-node": "^10.9.1"
   }
 }

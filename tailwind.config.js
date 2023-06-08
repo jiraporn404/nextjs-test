@@ -14,9 +14,33 @@ module.exports = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       colors: {
-        'regal-blue': '#243c5a',
+        'blue': '#00A0A9',
+        'darkblue': '#006E96',
+        'lightblue': '#E3F0FF',
+        'red': '#EB5757',
       },
+      spacing: {
+        '1': '8px',
+        '2': '16px',
+        '3': '24px',
+        '4': '32px',
+        '5': '40px',
+        '6': '48px',
+      }
     },
+  },
+  daisyui: {
+    themes: [
+      {
+        mytheme: {
+          "primary": "#00A0A9",
+          "secondary": "#006E96",
+          "accent": "#ffffff",
+          "neutral": "#ffffff",
+          "base-100": "#fff",
+        },
+      },
+    ],
   },
   plugins: [
     "tw-elements/dist/plugin.cjs",
